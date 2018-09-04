@@ -1,0 +1,16 @@
+
+# io.dubbo.springboot.DubboProperties
+spring.dubbo:
+  # 扫描 @Service @Reference 注解所在的目录. 目录如果有多个用 英文逗号(,) 隔开
+  scan: com.github
+  # 只在服务端时需要下面的配置, 相当于这个配置: <dubbo:protocol name="dubbo" port="xx" serialization="kryo" />
+  protocol:
+    name: dubbo
+    port: 20871
+  application:
+    # <dubbo:application name="xxx" />
+    name: ${spring.application.name}
+    # <dubbo:registry address="zk://ip:port" timeout="10000"  />
+    registry:
+      address: zookeeper://dev-zk:2181
+      timeout: 10000

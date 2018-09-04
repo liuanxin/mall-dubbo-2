@@ -1,0 +1,18 @@
+
+spring.dubbo:
+  scan: com.github
+  application:
+    name: ${spring.application.name}
+    registry:
+      address: zookeeper://unlimited-game.zk1.prod:2181
+      timeout: 10000
+      register: false
+    registries:
+      -
+        address: zookeeper://unlimited-game.zk2.prod:2181
+        timeout: 10000
+        register: false
+      -
+        address: zookeeper://unlimited-game.zk3.prod:2181
+        timeout: 10000
+        register: false

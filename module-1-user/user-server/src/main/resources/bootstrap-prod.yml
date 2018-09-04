@@ -1,0 +1,12 @@
+
+server.port: 9881
+logging.config: classpath:log-prod.xml
+
+spring.application.name: user
+
+spring.cloud.config:
+  uri: http://prod-config:8001/
+  name: all,${spring.application.name}
+  profile: prod
+
+management.security.enabled: false

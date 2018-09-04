@@ -1,0 +1,9 @@
+
+server.port: 8001
+logging.config: classpath:log-dev.xml
+
+spring:
+  application.name: service-config
+  profiles.active: native
+  cloud.config.server.native.searchLocations: classpath:config/
+#  cloud.config.server.native.searchLocations: file:/home/admin/config/

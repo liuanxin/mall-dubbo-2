@@ -1,0 +1,18 @@
+
+search.ip-port: test-search:9200
+
+database:
+  url:  jdbc:mysql://test-db-search:test-port/x123x?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&statementInterceptors=com.github.common.sql.ShowSqlInterceptor
+  userName: test-search-user
+  password: test-search-pass
+  initialSize: 2
+  minIdle: 2
+  maxActive: 10
+  maxWait: 60000
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  validationQuery: SELECT 'x'
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  filters: stat,wall

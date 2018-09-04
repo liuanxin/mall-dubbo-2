@@ -1,0 +1,161 @@
+
+** spring boot 2 + dubbo
+
+*** 说明
+安装 lombok 和 mybatis 插件
+
+将下面的内容保存成 settings.xml 并放到 ${user.home}/.m2 目录下(没有此目录则新建), 如果想要改变仓库地址, 注释解开并设置即可
+#+BEGIN_SRC xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <!-- <localRepository>仓库地址. 默认是 ${user.home}/.m2/repository </localRepository> -->
+
+    <mirrors>
+        <mirror>
+            <id>aliyun</id>
+            <name>aliyun maven</name>
+            <mirrorOf>central</mirrorOf>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </mirror>
+    </mirrors>
+
+    <profiles>
+        <profile>
+            <id>company</id>
+            <repositories>
+                <repository>
+                    <id>aliyun-repository</id>
+                    <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>false</enabled></snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>aliyun-plugin</id>
+                    <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>false</enabled></snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>company</activeProfile>
+    </activeProfiles>
+</settings>
+#+END_SRC
+
+moduble 开头的模块代表了具体的功能模块, 它下面的 server 是 dubbo 的服务端, 本地开发时直接运行相关的 Application 即可.
+当前只有一个 web 项目, 主要是用来向前端项目提供 http 调用的
+本地运行时, 需要先安装 zookeeper, 如果要连接其他的 zk 服务器, 修改相关的 bootstrap.yml 配置即可
+
+
+*** 分页示例
+
+在 controller 中这样
+#+BEGIN_SRC java
+@GetMapping("/demo")  // 如果前台不传 page 和 limit, 或者传的是 page=a&limit=-100 将会有默认值 page=1&limit=15
+public JsonResult DemoList(Page page) {
+    return JsonResult.success("用户列表", demoService.pageList(page));
+}
+#+END_SRC
+
+dubbo 的接口及实现类
+#+BEGIN_SRC java
+public interface DemoService {
+    PageInfo pageList(Page page);
+}
+
+@com.alibaba.dubbo.config.annotation.Service
+public class DemoServiceImpl implements DemoService {
+
+    @Autowired
+    private DemoMapper demoMapper;
+
+    @Override
+    public PageInfo DemoList(Page page) {
+        // 会自动基于 Page 中的 page 和 limit 值拼到 sql 语句中去
+        return PageInfo.returnList(demoMapper.selectByExample(null, page.bounds()));
+    }
+}
+#+END_SRC
+
+在 dao(repository) 中只需要在查询的地方加多一个方法即可
+#+BEGIN_SRC java
+public interface DemoMapper {
+
+    // ...
+
+    // 这是原先有的方法
+    List<Demo> selectByExample(DemoExample example);
+
+    // 加上这个方法(只是多了一个参数). 当调用此方法且 pageBounds 有值时将会自动基于数据库发起 limit 分页查询
+    List<Demo> selectByExample(DemoExample example, PageBounds pageBounds);
+
+    // ...
+}
+#+END_SRC
+
+
+*** 通过 Example 简化查询
+
+如果我们想要生成如下的 sql 语句:
+#+BEGIN_SRC sql
+select xxx from `t_demo` where `name` = 'xx' and `level` > 1 and `ver` in (1, 2, 3)
+#+END_SRC
+
+可以这样构建  example 来达到上面的效果
+#+BEGIN_SRC java
+DemoExample demoExample = new DemoExample();
+demoExample.or().andNameEqualTo("xx").andLevelGreaterThan(1).andVerIn(Arrays.asList(1, 2, 3));
+demoMapper.selectByExample(DemoExample);
+#+END_SRC
+
+同样的 where 条件也可以用在 update 和 delete 上
+#+BEGIN_SRC java
+Demo demo = new Demo();
+demo.setPassword("abc");
+
+DemoExample demoExample = new DemoExample();
+demoExample.or().andNameEqualTo("xx").andLevelGreaterThan(1).andVerIn(Arrays.asList(1, 2, 3));
+
+demoMapper.updateByExampleSelective(demo, demoExample);
+#+END_SRC
+
+上面将会生成如下的 sql 语句
+#+BEGIN_SRC sql
+update `t_demo` set `password`='abc' where `name` = 'xx' and `level` > 1 and `ver` in (1, 2, 3)
+#+END_SRC
+
+如果要生成 or 语句, 可以像这样
+#+BEGIN_SRC java
+DemoExample demoExample = new DemoExample();
+demoExample.or().andNameEqualTo("xx").andCreateTimeLessThan(new Date());
+demoExample.or().andEmailEqualTo("xx").andCerIsNotNull();
+demoExample.or().andPhoneEqualTo("xxx").andVerIn(Arrays.asList(1, 2, 3));
+demoMapper.selectByExample(DemoExample);
+#+END_SRC
+
+生成的 sql 如下
+#+BEGIN_SRC sql
+select ... from `t_demo`
+where (`name` = 'xx' and `create_time` < xxx)
+   or (`email` = 'xx' and `cer` is not null)
+   or (`phone` = 'xx' and `ver` in (1, 2, 3) )
+#+END_SRC
+
+如果要生成条件复杂的 or 语句(比如在一个 and 条件里面有好几个 or), exmple 将会无法实现, 此时就需要手写 sql 了
+
+
+当有一些不得不联表的 sql 语句, 或者基于 example 很难生成的 or 查询, 此时放在 custom.xml 中, 确保自动生成和手写的 sql 分开管理.
+
+PS: 尽量不要使用 join 来联表, 尽量由应用程序来组装数据并每次向数据库发起单一且易维护的 sql 语句,
+这样的好处是就算到了大后期, 对于数据库而言, 压力也全在单表的 sql 上, 优化起来很容易,
+而且应用程序还可以在这里加上二级缓存, 将大部分的压力由 db 的 io 操作转移到了应用程序的内部运算和网卡的数据库连接上,
+java 做内部运算本就是强项, 这一块成为瓶颈可能性很低且易重构, 数据库连接可以由 druid 连接池来达到高性能操作.
+
+阿里在 17 年初出的开发手册中也明确说明: 超级三个表禁止 join, 是有其原因的.

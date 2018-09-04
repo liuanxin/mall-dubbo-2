@@ -1,0 +1,12 @@
+
+server.port: 9882
+logging.config: classpath:log-dev.xml
+
+spring.application.name: product
+
+spring.cloud.config:
+  uri: http://dev-config:8001/
+  name: all,${spring.application.name}
+  profile: dev
+
+management.security.enabled: false

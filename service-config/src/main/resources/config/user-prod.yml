@@ -1,0 +1,38 @@
+
+database:
+  url: jdbc:mysql://prod-db-user:3306/user?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
+  userName: prod-user-user
+  password: prod-user-pass
+  initialSize: 10
+  minIdle: 10
+  maxActive: 100
+  maxWait: 60000
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  validationQuery: SELECT 'x'
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  filters: stat,wall
+
+spring.redis:
+  host: prod-redis
+  port: 6379
+
+spring.dubbo:
+  scan: com.github
+  protocol:
+    name: dubbo
+    port: 20881
+  application:
+    name: ${spring.application.name}
+    registry:
+      address: zookeeper://prod-zk1:2181
+      timeout: 10000
+    registries:
+      -
+        address: zookeeper://prod-zk2:2181
+        timeout: 10000
+      -
+        address: zookeeper://prod-zk3:2181
+        timeout: 10000

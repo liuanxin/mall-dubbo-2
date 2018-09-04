@@ -1,0 +1,12 @@
+
+server.port: 8787
+logging.config: classpath:log-test.xml
+
+spring.application.name: web-manager
+
+spring.cloud.config:
+  uri: http://test-config:8001/
+  name: all,${spring.application.name},zk-client
+  profile: test
+
+management.security.enabled: false

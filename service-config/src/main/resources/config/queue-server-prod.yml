@@ -1,0 +1,18 @@
+
+spring.dubbo:
+  scan: com.github
+  protocol:
+    name: dubbo
+    port: 20871
+  application:
+    name: ${spring.application.name}
+    registry:
+      address: zookeeper://prod-zk1:2181
+      timeout: 10000
+    registries:
+      -
+        address: zookeeper://prod-zk2:2181
+        timeout: 10000
+      -
+        address: zookeeper://prod-zk3:2181
+        timeout: 10000

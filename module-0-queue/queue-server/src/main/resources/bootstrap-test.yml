@@ -1,0 +1,12 @@
+
+server.port: 9871
+logging.config: classpath:log-test.xml
+
+spring.application.name: queue
+
+spring.cloud.config:
+  uri: http://test-config:8001/
+  name: all,queue,queue-server
+  profile: test
+
+management.security.enabled: false

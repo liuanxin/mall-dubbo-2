@@ -1,0 +1,12 @@
+
+server.port: 8686
+logging.config: classpath:log-dev.xml
+
+spring.application.name: web-backend
+
+spring.cloud.config:
+  uri: http://dev-config:8001/
+  name: all,${spring.application.name},zk-client
+  profile: dev
+
+management.security.enabled: false

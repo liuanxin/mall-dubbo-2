@@ -1,0 +1,11 @@
+
+server.port: 8001
+logging.config: classpath:log-prod.xml
+
+spring:
+  application.name: service-config
+  cloud.config.server.git:
+    uri: https://git.xxx.com/orign/project
+    username: xxx
+    password: yyy
+    defaultLabel: master

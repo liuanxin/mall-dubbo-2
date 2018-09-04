@@ -1,0 +1,13 @@
+
+# io.dubbo.springboot.DubboProperties
+spring.dubbo:
+  # 扫描 @Service @Reference 注解所在的目录, 前者在 容器初始化之后 注入, 前者在 窗口初始化之前 注入. 目录如果有多个用 <英文逗号(,)> 隔开
+  scan: com.github
+  application:
+    # <dubbo:application name="xxx" />
+    name: ${spring.application.name}
+    # <dubbo:registry address="zk://ip:port" timeout="10000" register="false" /> 只向注册中心订阅服务, 不注册
+    registry:
+      address: zookeeper://dev-zk:2181
+      timeout: 10000
+      register: false

@@ -1,0 +1,2 @@
+spanConsumer=com.github.dubbo.trace.SpanConsumerFilter
+spanProvider=com.github.dubbo.trace.SpanProviderFilter

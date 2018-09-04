@@ -1,0 +1,8 @@
+
+spring.activemq:
+  broker-url: failover:(tcp://prod-queue1:61616,tcp://prod-queue2:61616)?timeout=3000&startupMaxReconnectAttempts=5
+  user: admin
+  password: admin
+  pool:
+    enabled: true
+    max-connections: 10

@@ -1,0 +1,11 @@
+
+logging.config: classpath:log-prod.xml
+
+spring.application.name: queue-consume
+
+spring.cloud.config:
+  uri: http://prod-config:8001/
+  name: all,queue
+  profile: prod
+
+management.security.enabled: false

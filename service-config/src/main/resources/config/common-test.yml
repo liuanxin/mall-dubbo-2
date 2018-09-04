@@ -1,0 +1,37 @@
+
+database:
+  url: jdbc:mysql://test-db-common:3306/common?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&statementInterceptors=com.github.common.sql.ShowSqlInterceptor
+  userName: test-common-user
+  password: test-common-pass
+  initialSize: 2
+  minIdle: 2
+  maxActive: 10
+  maxWait: 60000
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  validationQuery: SELECT 'x'
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+
+spring.redis:
+  host: test-redis
+  port: 6379
+
+spring.dubbo:
+  scan: com.github
+  protocol:
+    name: dubbo
+    port: 20870
+  application:
+    name: ${spring.application.name}
+    registry:
+      address: zookeeper://test-zk1:2181
+      timeout: 10000
+    registries:
+      -
+        address: zookeeper://test-zk2:2182
+        timeout: 10000
+      -
+        address: zookeeper://test-zk3:2183
+        timeout: 10000

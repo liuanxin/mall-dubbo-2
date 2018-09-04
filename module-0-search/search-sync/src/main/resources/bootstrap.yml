@@ -1,0 +1,12 @@
+
+server.port: 9870
+logging.config: classpath:log-dev.xml
+
+spring.application.name: search-sync
+
+spring.cloud.config:
+  uri: http://dev-config:8001/
+  name: all,search
+  profile: dev
+
+management.security.enabled: false

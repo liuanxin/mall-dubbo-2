@@ -1,0 +1,10 @@
+
+spring:
+#  session:
+#    store-type: redis
+#  redis:
+#    host: dev-redis
+#    port: 6379
+  http.multipart:
+    maxFileSize: 12Mb
+    maxRequestSize: 20Mb

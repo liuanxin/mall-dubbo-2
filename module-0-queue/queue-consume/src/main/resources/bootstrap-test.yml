@@ -1,0 +1,11 @@
+
+logging.config: classpath:log-test.xml
+
+spring.application.name: queue-consume
+
+spring.cloud.config:
+  uri: http://test-config:8001/
+  name: all,queue
+  profile: test
+
+management.security.enabled: false

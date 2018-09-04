@@ -1,0 +1,12 @@
+
+server.port: 9871
+logging.config: classpath:log-dev.xml
+
+spring.application.name: queue
+
+spring.cloud.config:
+  uri: http://dev-config:8001/
+  name: all,queue,queue-server
+  profile: dev
+
+management.security.enabled: false
