@@ -365,7 +365,7 @@ class Server {
             "  name: all,${spring.application.name}\n" +
             "  profile: dev\n" +
             "\n" +
-            "management.security.enabled: false\n";
+            "management.endpoints.web.exposure.include: \"*\"\n";
 
     private static String APPLICATION_TEST_YML = "\n" +
             "server.port: %s\n" +
@@ -378,7 +378,7 @@ class Server {
             "  name: all,${spring.application.name}\n" +
             "  profile: test\n" +
             "\n" +
-            "management.security.enabled: false\n";
+            "management.endpoints.web.exposure.include: \"*\"\n";
 
     private static String APPLICATION_PROD_YML = "\n" +
             "server.port: %s\n" +
@@ -391,7 +391,7 @@ class Server {
             "  name: all,${spring.application.name}\n" +
             "  profile: prod\n" +
             "\n" +
-            "management.security.enabled: false\n";
+            "management.endpoints.web.exposure.include: \"*\"\n";
 
     private static final String LOG_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<configuration>\n" +
