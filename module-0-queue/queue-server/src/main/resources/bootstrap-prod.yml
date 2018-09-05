@@ -8,5 +8,3 @@ spring.cloud.config:
   uri: http://prod-config:8001/
   name: all,queue,queue-server
   profile: prod
-
-management.security.enabled: false

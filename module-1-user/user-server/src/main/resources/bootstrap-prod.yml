@@ -8,5 +8,3 @@ spring.cloud.config:
   uri: http://prod-config:8001/
   name: all,${spring.application.name}
   profile: prod
-
-management.security.enabled: false

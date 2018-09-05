@@ -8,5 +8,3 @@ spring.cloud.config:
   uri: http://dev-config:8001/
   name: all
   profile: dev
-
-management.security.enabled: false
