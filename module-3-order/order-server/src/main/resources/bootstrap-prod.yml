@@ -1,5 +1,5 @@
 
-server.port: 9883
+# server.port: 9883
 logging.config: classpath:log-prod.xml
 
 spring.application.name: order

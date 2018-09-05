@@ -5,5 +5,5 @@ logging.config: classpath:log-dev.xml
 spring:
   application.name: service-config
   profiles.active: native
-  cloud.config.server.native.searchLocations: classpath:config/
-#  cloud.config.server.native.searchLocations: file:/home/admin/config/
+#  cloud.config.server.native.searchLocations: classpath:config/
+  cloud.config.server.native.searchLocations: file:/home/tony/work/project/mall-dubbo-2/service-config/src/main/resources/config/

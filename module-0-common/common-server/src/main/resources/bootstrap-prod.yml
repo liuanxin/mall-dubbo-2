@@ -1,5 +1,5 @@
 
-server.port: 9870
+# server.port: 9870
 logging.config: classpath:log-prod.xml
 
 spring.application.name: common

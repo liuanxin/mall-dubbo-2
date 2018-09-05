@@ -1,5 +1,5 @@
 
-server.port: 9881
+# server.port: 9881
 logging.config: classpath:log-prod.xml
 
 spring.application.name: user

@@ -355,7 +355,7 @@ class Server {
             "}\n";
 
     private static String APPLICATION_YML = "\n" +
-            "server.port: %s\n" +
+            "# server.port: %s\n" +
             "logging.config: classpath:log-dev.xml\n" +
             "\n" +
             "spring.application.name: %s\n" +
@@ -367,7 +367,7 @@ class Server {
             ;
 
     private static String APPLICATION_TEST_YML = "\n" +
-            "server.port: %s\n" +
+            "# server.port: %s\n" +
             "logging.config: classpath:log-test.xml\n" +
             "\n" +
             "spring.application.name: %s\n" +
@@ -379,7 +379,7 @@ class Server {
             ;
 
     private static String APPLICATION_PROD_YML = "\n" +
-            "server.port: %s\n" +
+            "# server.port: %s\n" +
             "logging.config: classpath:log-prod.xml\n" +
             "\n" +
             "spring.application.name: %s\n" +
