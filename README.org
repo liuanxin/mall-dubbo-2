@@ -50,8 +50,7 @@
 #+END_SRC
 
 moduble 开头的模块代表了具体的功能模块, 它下面的 server 是 dubbo 的服务端, 本地开发时直接运行相关的 Application 即可.
-当前只有一个 web 项目, 主要是用来向前端项目提供 http 调用的
-本地运行时, 需要先安装 zookeeper, 如果要连接其他的 zk 服务器, 修改相关的 bootstrap.yml 配置即可
+本地运行时, 需要先安装 zookeeper, 如果要连接其他的 zk 服务器, 修改相关的 bootstrap.yml 配置
 
 
 *** 分页示例
