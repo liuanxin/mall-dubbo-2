@@ -75,7 +75,7 @@
     </dependencies>
 
     <build>
-        <finalName>wlw-task</finalName>
+        <finalName>timing-task</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
