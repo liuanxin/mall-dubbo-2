@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.github.common.ModuleTest.*;
+import static com.github.common.ModuleTest2.*;
 
-public class ModuleTest {
+public class ModuleTest2 {
 
     static final String PROJECT = "mall-dubbo-2";
     static final String PACKAGE = "com.github";
     static final String COMMON = "mall-common";
     static final String GLOBAL = "mall-global";
     @SuppressWarnings({"ConstantConditions", "WeakerAccess"})
-    static String PARENT = ModuleTest.class.getClassLoader().getResource("").getFile() + "../../../";
+    static String PARENT = ModuleTest2.class.getClassLoader().getResource("").getFile() + "../../../";
     static String PACKAGE_PATH = PACKAGE.replaceAll("\\.", "/");
 
     static String capitalize(String name) {
