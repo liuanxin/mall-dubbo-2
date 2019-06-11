@@ -38,7 +38,7 @@ public class CorsFilter implements Filter {
             if (U.isBlank(response.getHeader(ACCESS_CONTROL_ALLOW_HEADERS))) {
                 // 如果有自定义头, 附加进去, 避免用 *
                 response.addHeader(ACCESS_CONTROL_ALLOW_HEADERS,
-                        "Accept, Accept-Encoding, Accept-Language, Cache-Control, " +
+                                "Accept, Accept-Encoding, Accept-Language, Cache-Control, " +
                                 "Connection, Cookie, DNT, Host, User-Agent, Content-Type, Authorization, " +
                                 "X-Requested-With, Origin, Access-Control-Request-headers, " +
                                 Const.TOKEN + ", " + Const.VERSION);
@@ -56,11 +56,9 @@ public class CorsFilter implements Filter {
 
         String scheme = request.getScheme();
         int port = request.getServerPort();
-        boolean http = ("http".equals(scheme) && port != 80);
-        boolean https = ("https".equals(scheme) && port != 443);
 
         domain.append(scheme).append("://").append(request.getServerName());
-        if (http || https) {
+        if (("http".equals(scheme) && port != 80) || ("https".equals(scheme) && port != 443)) {
             domain.append(':');
             domain.append(port);
         }
