@@ -2,7 +2,6 @@ package com.github.global.service;
 
 import com.github.common.date.DateUtil;
 import com.github.common.util.U;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
@@ -12,22 +11,24 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.types.Expiration;
 import redis.clients.jedis.Jedis;
-import redis.clients.util.SafeEncoder;
+import redis.clients.jedis.util.SafeEncoder;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+/** @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration */
 @Configuration
 @ConditionalOnClass({ Jedis.class, RedisTemplate.class })
 @ConditionalOnBean({ RedisTemplate.class, StringRedisTemplate.class })
 public class CacheService {
 
-    /** @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration */
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    private final StringRedisTemplate stringRedisTemplate;
+    public final RedisTemplate<Object, Object> redisTemplate;
 
-    @Autowired
-    public RedisTemplate<Object, Object> redisTemplate;
+    public CacheService(StringRedisTemplate stringRedisTemplate, RedisTemplate<Object, Object> redisTemplate) {
+        this.stringRedisTemplate = stringRedisTemplate;
+        this.redisTemplate = redisTemplate;
+    }
 
     /** 往 redis 中放值 */
     public void set(String key, String value) {

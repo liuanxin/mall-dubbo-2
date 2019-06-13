@@ -1,6 +1,6 @@
 
 database:
-  url: jdbc:mysql://test-db-product:3306/product?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&statementInterceptors=com.github.common.sql.ShowSqlInterceptor
+  url: jdbc:mysql://test-db-product:3306/product?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&statementInterceptors=com.github.common.sql.ShowSql8Interceptor
   userName: test-product-user
   password: test-product-pass
   initialSize: 2

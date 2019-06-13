@@ -1,6 +1,6 @@
 
 database:
-  url: jdbc:mysql://test-db-order:3306/order?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&statementInterceptors=com.github.common.sql.ShowSqlInterceptor
+  url: jdbc:mysql://test-db-order:3306/order?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&statementInterceptors=com.github.common.sql.ShowSql8Interceptor
   userName: test-order-user
   password: test-order-pass
   initialSize: 2
