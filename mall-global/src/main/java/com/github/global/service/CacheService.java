@@ -3,14 +3,13 @@ package com.github.global.service;
 import com.github.common.date.DateUtil;
 import com.github.common.util.U;
 import com.google.common.collect.Lists;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
-import redis.clients.jedis.Jedis;
 
 import java.util.Date;
 import java.util.List;
@@ -18,13 +17,13 @@ import java.util.concurrent.TimeUnit;
 
 /** @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration */
 @Configuration
-@ConditionalOnClass({ Jedis.class, RedisTemplate.class })
-@ConditionalOnBean({ RedisTemplate.class, StringRedisTemplate.class })
+@ConditionalOnClass({ RedisTemplate.class, StringRedisTemplate.class })
 public class CacheService {
 
     private final StringRedisTemplate stringRedisTemplate;
     public final RedisTemplate<Object, Object> redisTemplate;
 
+    @Autowired
     public CacheService(StringRedisTemplate stringRedisTemplate, RedisTemplate<Object, Object> redisTemplate) {
         this.stringRedisTemplate = stringRedisTemplate;
         this.redisTemplate = redisTemplate;
