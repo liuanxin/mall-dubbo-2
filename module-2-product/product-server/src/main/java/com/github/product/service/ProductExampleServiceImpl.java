@@ -12,13 +12,8 @@ import com.github.product.model.DemoModel;
 @Service(version = Const.DUBBO_VERSION, timeout = Const.DUBBO_TIMEOUT, filter = Const.DUBBO_FILTER, interfaceClass = ProductExampleService.class)
 public class ProductExampleServiceImpl implements ProductExampleService {
 
-    /*
-    private final ProductMapper productMapper;
-
-    public ProductExampleServiceImpl(ProductMapper productMapper) {
-        this.productMapper = productMapper;
-    }
-    */
+    // @Autowired
+    // private ProductMapper productMapper;
 
     @Override
     public PageInfo<DemoModel> demo(Page page) {
