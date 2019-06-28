@@ -1,10 +1,10 @@
 package com.github.common.config;
 
+import com.github.common.constant.CommonConst;
 import com.github.common.resource.CollectResourceUtil;
 import com.github.common.resource.CollectTypeHandlerUtil;
 import com.github.common.util.A;
 import com.github.global.constant.GlobalConst;
-import com.github.common.constant.CommonConst;
 import org.apache.ibatis.type.TypeHandler;
 import org.springframework.core.io.Resource;
 
