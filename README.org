@@ -72,8 +72,11 @@ public interface DemoService {
 @com.alibaba.dubbo.config.annotation.Service
 public class DemoServiceImpl implements DemoService {
 
-    @Autowired
-    private DemoMapper demoMapper;
+    private final DemoMapper demoMapper;
+
+    public DemoServiceImpl(DemoMapper demoMapper) {
+        this.demoMapper = demoMapper;
+    }
 
     @Override
     public PageInfo DemoList(Page page) {
