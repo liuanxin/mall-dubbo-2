@@ -82,7 +82,7 @@
         <zkclient.version>0.11</zkclient.version>
         <spring-boot-dubbo.version>1.0.0</spring-boot-dubbo.version>
 
-        <api-document.version>0.3.9</api-document.version>
+        <api-document.version>0.4.1</api-document.version>
     </properties>
 
     <dependencyManagement>
@@ -202,7 +202,7 @@
             </dependency>
             <!-- 当前项目相关 -->
 
-            
+
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-netflix</artifactId>
@@ -225,7 +225,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>-->
-            
+
             <dependency>
                 <groupId>io.zipkin.java</groupId>
                 <artifactId>zipkin-server</artifactId>
