@@ -19,11 +19,10 @@ public class SearchDataSourceInit {
     @Bean
     public RestHighLevelClient search() {
         String[] ipPortArray = ipAndPort.split(",");
-        int length = ipPortArray.length;
-        List<HttpHost> hostList = Lists.newArrayListWithCapacity(length);
+        List<HttpHost> hostList = Lists.newArrayListWithCapacity(ipPortArray.length);
         for (String ipAndPort : ipPortArray) {
             hostList.add(HttpHost.create(ipAndPort));
         }
-        return new RestHighLevelClient(RestClient.builder(hostList.toArray(new HttpHost[length])));
+        return new RestHighLevelClient(RestClient.builder(hostList.toArray(new HttpHost[0])));
     }
 }

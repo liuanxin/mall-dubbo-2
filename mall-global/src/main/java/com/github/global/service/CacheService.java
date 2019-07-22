@@ -61,7 +61,7 @@ public class CacheService {
      * @param value 值
      */
     public boolean tryLock(String key, String value) {
-        return tryLock(key, value, 10, TimeUnit.SECONDS, 1, 10);
+        return tryLock(key, value, 10, TimeUnit.SECONDS, 1, 1);
     }
     /**
      * <pre>
