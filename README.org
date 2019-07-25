@@ -77,11 +77,8 @@ public interface DemoService {
 @com.alibaba.dubbo.config.annotation.Service
 public class DemoServiceImpl implements DemoService {
 
-    private final DemoMapper demoMapper;
-    // 用构造器来注入, 不用 @Autowired
-    public DemoServiceImpl(DemoMapper demoMapper) {
-        this.demoMapper = demoMapper;
-    }
+    @Autowired
+    private DemoMapper demoMapper;
 
     @Override
     public PageInfo<Demo> pageList(Demo param, Page page) {
