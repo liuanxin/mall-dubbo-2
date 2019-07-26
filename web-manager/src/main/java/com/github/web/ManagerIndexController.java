@@ -1,5 +1,6 @@
 package com.github.web;
 
+import com.github.common.RenderViewResolver;
 import com.github.common.json.JsonResult;
 import com.github.common.util.SecurityCodeUtil;
 import com.github.common.util.U;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -19,10 +19,15 @@ import java.io.IOException;
 @Controller
 public class ManagerIndexController {
 
-    @GetMapping("/")
     @ResponseBody
+    @GetMapping("/")
     public String index() {
-        return "web-platform";
+        return "api";
+    }
+
+    @GetMapping("/change-version")
+    public JsonResult version() {
+        return JsonResult.success("版本号更改为: " + RenderViewResolver.changeVersion());
     }
 
     @ApiIgnore(false)
@@ -36,8 +41,8 @@ public class ManagerIndexController {
 
     @GetMapping("/code")
     public void code(HttpServletResponse response, String width, String height,
-                     String count, String style) throws IOException {
-        SecurityCodeUtil.Code code = SecurityCodeUtil.generateCode(count, style, width, height);
+                     String count, String style, String rgb) throws IOException {
+        SecurityCodeUtil.Code code = SecurityCodeUtil.generateCode(count, style, width, height, rgb);
 
         // 往 session 里面丢值
         ManagerSessionUtil.putImageCode(code.getContent());
@@ -48,6 +53,6 @@ public class ManagerIndexController {
         response.addHeader("Cache-Control", "post-check=0, pre-check=0");
         response.setHeader("Pragma", "no-cache");
         response.setContentType("image/jpeg");
-        ImageIO.write(code.getImage(), "jpeg", response.getOutputStream());
+        javax.imageio.ImageIO.write(code.getImage(), "jpeg", response.getOutputStream());
     }
 }
