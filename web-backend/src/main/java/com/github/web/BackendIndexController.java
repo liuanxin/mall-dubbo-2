@@ -3,6 +3,9 @@ package com.github.web;
 import com.github.common.json.JsonResult;
 import com.github.common.util.SecurityCodeUtil;
 import com.github.common.util.U;
+import com.github.global.constant.Develop;
+import com.github.liuanxin.api.annotation.ApiIgnore;
+import com.github.liuanxin.api.annotation.ApiMethod;
 import com.github.util.BackendDataCollectUtil;
 import com.github.util.BackendSessionUtil;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@ApiIgnore
 @Controller
 public class BackendIndexController {
 
@@ -21,6 +25,8 @@ public class BackendIndexController {
         return "api-gateway";
     }
 
+    @ApiIgnore(false)
+    @ApiMethod(value = "枚举信息", develop = Develop.COMMON)
     @GetMapping("/enum")
     @ResponseBody
     public JsonResult enumList(String type) {
