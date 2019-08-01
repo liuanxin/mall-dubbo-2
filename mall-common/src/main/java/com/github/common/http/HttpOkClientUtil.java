@@ -174,7 +174,6 @@ public class HttpOkClientUtil {
 
         if (U.isNotBlank(params)) {
             sbd.append(" params(");
-            sbd.append(" param(");
             int len = params.length();
             if (len > maxLen) {
                 sbd.append(params, 0, headTail).append(" <.> ").append(params, len - headTail, len);
