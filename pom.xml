@@ -67,8 +67,8 @@
         <druid.version>1.1.19</druid.version>
         <mybatis.version>3.5.2</mybatis.version>
         <mybatis-spring.version>2.0.2</mybatis-spring.version>
-        <mybatis-page.version>1.2.5</mybatis-page.version>
-        <mybatis-redis-cache.version>1.2.5</mybatis-redis-cache.version>
+        <mybatis-page.version>1.2.6</mybatis-page.version>
+        <mybatis-redis-cache.version>1.2.6</mybatis-redis-cache.version>
 
         <!-- -Ddubbo.reference.check=false -->
         <dubbo.version>2.6.2</dubbo.version>
