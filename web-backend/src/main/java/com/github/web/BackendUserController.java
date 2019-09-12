@@ -33,7 +33,7 @@ public class BackendUserController {
 
     // 请求当前接口时不需要登录, 文档示例中也不需要全局 token
     @NeedLogin(false)
-    @ApiTokens(false)
+    @ApiTokens
     @ApiMethod(value = "登录", develop = Develop.USER)
     @GetMapping("/login")
     public JsonResult<UserLoginVo> login(@ApiParam(value = "用户名", must = true) String userName,
