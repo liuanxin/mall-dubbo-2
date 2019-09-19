@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
@@ -192,6 +193,22 @@ public final class RequestUtils {
         return upload ? "uploading file" : U.formatParam(request.getParameterMap());
     }
 
+    public static String getRequestBody() {
+        try (BufferedReader reader = getRequest().getReader()) {
+            StringBuilder sbd = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sbd.append(line);
+            }
+            return sbd.toString();
+        } catch (IOException e) {
+            if (LogUtil.ROOT_LOG.isDebugEnabled()) {
+                LogUtil.ROOT_LOG.debug("get RequestBody exception", e);
+            }
+            return U.EMPTY;
+        }
+    }
+
     /** 先从请求头中查, 为空再从参数中查 */
     public static String getHeaderOrParam(String param) {
         HttpServletRequest request = getRequest();
@@ -243,7 +260,7 @@ public final class RequestUtils {
         try {
             response.setCharacterEncoding("utf-8");
             response.setContentType(type + ";charset=utf-8;");
-            response.getWriter().write(result);
+            response.getWriter().write(U.toStr(result));
         } catch (IllegalStateException e) {
             // 基于 response 调用了 getOutputStream(), 又再调用 getWriter() 会被 web 容器拒绝
             if (LogUtil.ROOT_LOG.isDebugEnabled()) {
