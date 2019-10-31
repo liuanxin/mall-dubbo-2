@@ -1,6 +1,6 @@
 
 database:
-  url: jdbc:mysql://test-db-user:3306/user?useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&queryInterceptors=com.github.common.sql.ShowSql8Interceptor
+  url: jdbc:mysql://test-db-user:3306/user?useAffectedRows=true&useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&queryInterceptors=com.github.common.sql.ShowSql8Interceptor
   userName: test-user-user
   password: test-user-pass
   initialSize: 2
