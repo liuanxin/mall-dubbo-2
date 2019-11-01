@@ -1,5 +1,7 @@
 
-search.ip-port: test-search:9200
+spring:
+  elasticsearch.rest:
+    uris: test-search:9200
 
 database:
   url:  jdbc:mysql://test-db-search:test-port/x123x?useAffectedRows=true&useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&queryInterceptors=com.github.common.sql.ShowSql8Interceptor
