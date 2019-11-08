@@ -94,7 +94,9 @@ public class GlobalException {
     }
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<String> missParam(MissingServletRequestParameterException e) {
-        String msg = online ? "无法响应此请求" : String.format("缺少必须的参数(%s), 类型(%s)", e.getParameterName(), e.getParameterType());
+        String msg = online
+                ? "无法响应此请求"
+                : String.format("缺少必须的参数(%s), 类型(%s)", e.getParameterName(), e.getParameterType());
 
         bindAndPrintLog(msg, e);
         return ResponseEntity.status(JsonCode.FAIL.getCode()).body(msg);
@@ -128,7 +130,9 @@ public class GlobalException {
             LogUtil.ROOT_LOG.error("有错误", e);
         }
 
-        String msg = U.returnMsg(e, online);
+        Throwable cause = e.getCause();
+        Throwable t = (cause == null ? e : cause);
+        String msg = U.returnMsg(t, online);
         return ResponseEntity.status(JsonCode.FAIL.getCode()).body(msg);
     }
 
