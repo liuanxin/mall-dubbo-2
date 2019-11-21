@@ -11,8 +11,12 @@ import java.util.Map;
 
 public final class FileUtil {
 
-    /** 保存单个文件到指定的位置, 并将此文件的 url 地址返回 */
-    public static String save(MultipartFile file, String directoryPrefix, String urlPrefix) {
+    /**
+     * 保存单个文件到指定的位置, 并将此文件的 url 地址返回
+     * 比如 file 是 abc.jpg, directory 地址是 /mnt/data, url 是 image.xxx.com, addYmd 是 true
+     * 文件将会保存在 /mnt/data/YYYY/MM/DD/uuid.jpg, 返回 //image.xxx.com/YYYY/MM/DD/uuid.jpg
+     */
+    public static String save(MultipartFile file, String directoryPrefix, String urlPrefix, boolean addYmd) {
         directoryPrefix = directoryPrefix.trim();
         // 保存目录以 / 开头, 结尾不带 /
         directoryPrefix = U.addPrefix(directoryPrefix);
@@ -32,7 +36,7 @@ public final class FileUtil {
         }
 
         // 保存及访问地址中拼上 /年/月/日/ 按日来保存文件, 前后都要有 /
-        String middlePath = "/" + DateUtil.formatUsaDate(DateUtil.now()) + "/";
+        String middlePath = addYmd ? ("/" + DateUtil.formatUsaDate(DateUtil.now()) + "/") : "/";
         // 目录不存在就生成
         File directory = new File(directoryPrefix + middlePath);
         if (!directory.exists()) {
@@ -57,7 +61,7 @@ public final class FileUtil {
     public static Map<String, String> save(List<MultipartFile> fileList, String directoryPrefix, String urlPrefix) {
         Map<String, String> nameUrlMap = Maps.newHashMap();
         for (MultipartFile file : fileList) {
-            String url = save(file, directoryPrefix, urlPrefix);
+            String url = save(file, directoryPrefix, urlPrefix, false);
             nameUrlMap.put(file.getOriginalFilename(), url);
         }
         return nameUrlMap;

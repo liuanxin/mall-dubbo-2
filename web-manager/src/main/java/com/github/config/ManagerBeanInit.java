@@ -6,6 +6,7 @@ import com.github.util.ManagerSessionUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.freemarker.FreeMarkerProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -37,5 +38,11 @@ public class ManagerBeanInit {
         properties.setSuffix(".ftl");
         properties.applyToMvcViewResolver(resolver);
         return resolver;
+    }
+
+    @Bean
+    @ConfigurationProperties(prefix = "config")
+    public ManagerConfig config() {
+        return new ManagerConfig();
     }
 }

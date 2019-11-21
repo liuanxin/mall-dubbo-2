@@ -55,7 +55,7 @@ public class ProductDataSourceInit {
         // 装载 typeHandler 实现
         sessionFactory.setTypeHandlers(ProductConfigData.HANDLER_ARRAY);
         // 插件
-        sessionFactory.setPlugins(new Interceptor[] { mybatisPage() });
+        sessionFactory.setPlugins(mybatisPage());
         return sessionFactory.getObject();
     }
 

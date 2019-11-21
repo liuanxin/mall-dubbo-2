@@ -38,6 +38,8 @@
         <module>module-2-product</module>
         <!-- 订单模块 -->
         <module>module-3-order</module>
+        <!-- 管理模块 -->
+        <module>module-99-manager</module>
 
         <!-- 路由其他模块的项目, 前端调用方 -->
         <module>web-backend</module>
@@ -179,6 +181,17 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>order-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>manager-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>manager-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

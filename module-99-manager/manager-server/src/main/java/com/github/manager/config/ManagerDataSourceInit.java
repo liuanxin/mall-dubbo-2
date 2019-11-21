@@ -1,4 +1,4 @@
-package com.github.user.config;
+package com.github.manager.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.common.Const;
@@ -26,7 +26,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableCaching
 @MapperScan(basePackages = Const.BASE_PACKAGE)
-public class UserDataSourceInit {
+public class ManagerDataSourceInit {
 
     /** mybatis 的分页插件 */
     private Interceptor mybatisPage() {
@@ -51,9 +51,9 @@ public class UserDataSourceInit {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         // 装载 xml 实现
-        sessionFactory.setMapperLocations(UserConfigData.RESOURCE_ARRAY);
+        sessionFactory.setMapperLocations(ManagerConfigData.RESOURCE_ARRAY);
         // 装载 typeHandler 实现
-        sessionFactory.setTypeHandlers(UserConfigData.HANDLER_ARRAY);
+        sessionFactory.setTypeHandlers(ManagerConfigData.HANDLER_ARRAY);
         // 插件
         sessionFactory.setPlugins(mybatisPage());
         return sessionFactory.getObject();

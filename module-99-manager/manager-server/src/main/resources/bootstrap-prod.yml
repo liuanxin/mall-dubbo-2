@@ -1,0 +1,10 @@
+
+# server.port: 9899
+logging.config: classpath:log-prod.xml
+
+spring.application.name: manager
+
+spring.cloud.config:
+  uri: http://prod-config:8001/
+  name: all,${spring.application.name}
+  profile: prod

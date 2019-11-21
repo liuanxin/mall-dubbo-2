@@ -12,11 +12,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/** @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration */
 @Configuration
 @ConditionalOnClass({ RedisTemplate.class, StringRedisTemplate.class })
 public class CacheService {
 
+    /** @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration */
     private final StringRedisTemplate stringRedisTemplate;
     private final RedisTemplate<Object, Object> redisTemplate;
 
@@ -41,6 +41,15 @@ public class CacheService {
                 set(key, value, now.getTime() - expireTime.getTime(), TimeUnit.MILLISECONDS);
             }
         }
+    }
+
+    public void expire(String key, long time, TimeUnit timeUnit) {
+        stringRedisTemplate.expire(key, time, timeUnit);
+    }
+
+    public long incr(String key) {
+        Long inc = stringRedisTemplate.opsForValue().increment(key, 1L);
+        return inc == null ? 0 : inc;
     }
 
     /**
@@ -132,11 +141,6 @@ public class CacheService {
         DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(script, Long.class);
         List<String> keys = Arrays.asList(key, value);
         stringRedisTemplate.execute(redisScript, keys);
-    }
-
-    /** 设置超时 */
-    public void expire(String key, int time, TimeUnit unit) {
-        redisTemplate.expire(key, time, unit);
     }
 
     /** 从 redis 中取值 */

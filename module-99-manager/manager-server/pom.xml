@@ -3,40 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>mall-dubbo-2</artifactId>
+        <artifactId>module-99-manager</artifactId>
         <groupId>com.github</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>web-manager</artifactId>
+    <artifactId>manager-server</artifactId>
+    <description>管理模块的服务端</description>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-        <!--<dependency>
-             <groupId>org.springframework.session</groupId>
-             <artifactId>spring-session</artifactId>
-         </dependency>
-         <dependency>
-             <groupId>org.springframework.boot</groupId>
-             <artifactId>spring-boot-starter-data-redis</artifactId>
-         </dependency>-->
-
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mall-common</artifactId>
@@ -48,32 +24,53 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>queue-model</artifactId>
+            <artifactId>manager-model</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>common-model</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>search-model</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>user-model</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>product-model</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>order-model</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>manager-model</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.liuanxin</groupId>
+            <artifactId>mybatis-page</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.liuanxin</groupId>
+            <artifactId>mybatis-redis-cache</artifactId>
         </dependency>
 
         <dependency>
@@ -100,15 +97,10 @@
             <groupId>io.dubbo.springboot</groupId>
             <artifactId>spring-boot-starter-dubbo</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.github.liuanxin</groupId>
-            <artifactId>api-document</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
-        <finalName>web-manager-8787</finalName>
+        <finalName>manager-server-9899</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

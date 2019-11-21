@@ -5,6 +5,7 @@ import com.github.common.resource.CollectEnumUtil;
 import com.github.common.util.A;
 import com.github.common.util.U;
 import com.github.global.constant.GlobalConst;
+import com.github.manager.constant.ManagerConst;
 import com.github.message.constant.QueueConst;
 import com.github.order.constant.OrderConst;
 import com.github.product.constant.ProductConst;
@@ -26,7 +27,8 @@ public final class ManagerDataCollectUtil {
             SearchConst.MODULE_NAME, SearchConst.class,
             UserConst.MODULE_NAME, UserConst.class,
             ProductConst.MODULE_NAME, ProductConst.class,
-            OrderConst.MODULE_NAME, OrderConst.class
+            OrderConst.MODULE_NAME, OrderConst.class,
+            ManagerConst.MODULE_NAME, ManagerConst.class
     );
 
     /** 放到渲染上下文的枚举数组 */

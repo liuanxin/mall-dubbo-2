@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.manager.repository.ManagerRoleMenuMapper">
+    <resultMap id="BaseResultMap" type="com.github.manager.model.ManagerRoleMenu">
+        <result column="rid" jdbcType="BIGINT" property="rid" />
+        <result column="mid" jdbcType="BIGINT" property="mid" />
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        `rid`, `mid`
+    </sql>
+    <select id="selectByExample" parameterType="com.github.manager.model.ManagerRoleMenuExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from `t_manager_role_menu`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="com.github.manager.model.ManagerRoleMenuExample">
+        delete from `t_manager_role_menu`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insertSelective" parameterType="com.github.manager.model.ManagerRoleMenu">
+        insert into `t_manager_role_menu`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rid != null">
+                `rid`,
+            </if>
+            <if test="mid != null">
+                `mid`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="rid != null">
+                #{rid,jdbcType=BIGINT},
+            </if>
+            <if test="mid != null">
+                #{mid,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.github.manager.model.ManagerRoleMenuExample" resultType="java.lang.Integer">
+        select count(*) from `t_manager_role_menu`
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update `t_manager_role_menu`
+        <set>
+            <if test="record.rid != null">
+                `rid` = #{record.rid,jdbcType=BIGINT},
+            </if>
+            <if test="record.mid != null">
+                `mid` = #{record.mid,jdbcType=BIGINT},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        insert into `t_manager_role_menu`
+        (
+        <foreach collection="list" index="index" item="item">
+            <if test="index == 0">
+                <trim suffixOverrides=",">
+                    <if test="item.rid != null">
+                        `rid`,
+                    </if>
+                    <if test="item.mid != null">
+                        `mid`,
+                    </if>
+                </trim>
+            </if>
+        </foreach>
+        )
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="item.rid != null">
+                    #{item.rid,jdbcType=BIGINT},
+                </if>
+                <if test="item.mid != null">
+                    #{item.mid,jdbcType=BIGINT},
+                </if>
+            </trim>
+        </foreach>
+    </insert>
+</mapper>

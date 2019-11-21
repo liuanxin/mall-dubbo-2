@@ -37,12 +37,13 @@ public class ModuleTest2 {
     }
 
     public static void main(String[] args) throws Exception {
-        generate("0-common",  "9870", "公共");
+//        generate("0-common",  "9870", "公共");
 //        generate("0-queue",   "9871", "消息队列");
 //        generate("0-search",  "9872", "搜索");
-        generate("1-user",    "9881", "用户");
-        generate("2-product", "9882", "商品");
-        generate("3-order",   "9883", "订单");
+//        generate("1-user",    "9881", "用户");
+//        generate("2-product", "9882", "商品");
+//        generate("3-order",   "9883", "订单");
+        generate("99-manager",   "9899", "管理");
 
         soutInfo();
     }
@@ -309,7 +310,7 @@ class Server {
             "        // 装载 typeHandler 实现\n" +
             "        sessionFactory.setTypeHandlers(%sConfigData.HANDLER_ARRAY);\n" +
             "        // 插件\n" +
-            "        sessionFactory.setPlugins(new Interceptor[] { mybatisPage() });\n" +
+            "        sessionFactory.setPlugins(mybatisPage());\n" +
             "        return sessionFactory.getObject();\n" +
             "    }\n" +
             "\n" +
