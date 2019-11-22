@@ -1,5 +1,7 @@
 package com.github.web;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.github.common.Const;
 import com.github.common.annotation.NotNeedLogin;
 import com.github.common.annotation.NotNeedPermission;
 import com.github.common.encrypt.Encrypt;
@@ -36,13 +38,14 @@ public class ManagerUserController {
     @Value("${spring.profiles.active:dev}")
     private String active;
 
+    @Reference(version = Const.DUBBO_VERSION, lazy = true, check = false, timeout = Const.DUBBO_TIMEOUT)
+    private ManagerService adminService;
+
     private final ManagerConfig config;
     private final CacheService cacheService;
-    private final ManagerService adminService;
-    public ManagerUserController(ManagerConfig config, CacheService cacheService, ManagerService adminService) {
+    public ManagerUserController(ManagerConfig config, CacheService cacheService) {
         this.config = config;
         this.cacheService = cacheService;
-        this.adminService = adminService;
     }
 
     @NotNeedLogin
@@ -71,7 +74,6 @@ public class ManagerUserController {
         } else {
             cacheService.delete(failLoginKey);
         }
-
         // 登录成功后填充菜单和权限, 平级放到用户上
         user.assignmentData(adminService.getUserRole(user));
         return JsonResult.success("登录成功并返回用户及菜单信息", getManagerUserVo(user));

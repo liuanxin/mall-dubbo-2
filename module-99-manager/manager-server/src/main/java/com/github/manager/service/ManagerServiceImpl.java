@@ -1,5 +1,7 @@
 package com.github.manager.service;
 
+import com.alibaba.dubbo.config.annotation.Service;
+import com.github.common.Const;
 import com.github.common.encrypt.Encrypt;
 import com.github.common.page.Page;
 import com.github.common.page.PageInfo;
@@ -12,7 +14,6 @@ import com.github.manager.repository.*;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
@@ -20,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Service(version = Const.DUBBO_VERSION, timeout = Const.DUBBO_TIMEOUT, filter = Const.DUBBO_FILTER, interfaceClass = ManagerService.class)
 public class ManagerServiceImpl implements ManagerService {
 
     private final ManagerUserMapper userMapper;

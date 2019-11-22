@@ -43,27 +43,6 @@ public class ManagerMenu implements Serializable {
     /** 菜单下的权限 */
     private List<ManagerPermission> permissionList;
 
-    /** 将多条菜单整理成有父子关系的菜单返回 */
-    public static List<ManagerMenu> handleRelation(List<ManagerMenu> menus) {
-        if (A.isNotEmpty(menus)) {
-            return Collections.emptyList();
-        }
-
-        List<ManagerMenu> menuList = Lists.newArrayList();
-        Multimap<String, ManagerMenu> childMap = LinkedListMultimap.create();
-        for (ManagerMenu menu : menus) {
-            if (menu.getPid() == ROOT_ID) {
-                menuList.add(menu);
-            } else {
-                childMap.put(U.toStr(menu.getPid()), menu);
-            }
-        }
-        Map<String, Collection<ManagerMenu>> relationMap = childMap.asMap();
-        for (ManagerMenu menu : menuList) {
-            handle(menu, relationMap);
-        }
-        return menuList;
-    }
     private static void handle(ManagerMenu menu, Map<String, Collection<ManagerMenu>> menuMap) {
         Collection<ManagerMenu> menus = menuMap.get(U.toStr(menu.getId()));
         if (A.isNotEmpty(menus)) {
@@ -127,7 +106,7 @@ public class ManagerMenu implements Serializable {
     }
 
     /** 将有层级关系的菜单平级返回 */
-    public static List<ManagerMenu> handleAllMenu(List<ManagerMenu> menus) {
+    static List<ManagerMenu> handleAllMenu(List<ManagerMenu> menus) {
         if (A.isEmpty(menus)) {
             return Collections.emptyList();
         } else {

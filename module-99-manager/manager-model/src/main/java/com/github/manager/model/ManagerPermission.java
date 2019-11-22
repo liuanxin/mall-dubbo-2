@@ -25,11 +25,11 @@ public class ManagerPermission implements Serializable {
     private String url;
 
 
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+
         ManagerPermission that = (ManagerPermission) o;
         return method.equals(that.method) && url.equals(that.url);
     }
