@@ -239,17 +239,13 @@ public class ManagerServiceImpl implements ManagerService {
         return roleMapper.selectByExample(null);
     }
     @Override
-    public List<ManagerRole> queryRole(Long userId) {
-        List<Long> rids;
-        if (U.greater0(userId)) {
-            ManagerUserRoleExample userRoleExample = new ManagerUserRoleExample();
-            userRoleExample.or().andUidEqualTo(userId);
-            List<ManagerUserRole> userRoles = userRoleMapper.selectByExample(userRoleExample);
-            rids = Lists.transform(userRoles, ManagerUserRole::getRid);
-        } else {
-            List<ManagerRole> roles = roleMapper.selectByExample(null);
-            rids = Lists.transform(roles, ManagerRole::getId);
+    public List<ManagerRole> queryRole(String name) {
+        ManagerRoleExample roleExample = new ManagerRoleExample();
+        if (U.isNotBlank(name)) {
+            roleExample.or().andNameLike(U.like(name));
         }
+        List<ManagerRole> roles = roleMapper.selectByExample(roleExample);
+        List<Long> rids = Lists.transform(roles, ManagerRole::getId);
         return fillRole(rids, true);
     }
     @Override

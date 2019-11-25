@@ -26,8 +26,8 @@ public interface ManagerService {
     /** 用户在查询自己的角色, 返回的每个角色对象包含菜单(无层级关系)和权限 */
     List<ManagerRole> getUserRole(ManagerUser user);
     List<ManagerRole> queryBasicRole();
-    /** 管理员查询用户的角色, 未传入 userId 则返回所有角色. 返回的每个角色对象包含菜单(有层级关系), 菜单里有权限 */
-    List<ManagerRole> queryRole(Long userId);
+    /** 管理员查询角色. 返回的每个角色对象里面菜单(带层级关系), 每个菜单下有权限 */
+    List<ManagerRole> queryRole(String name);
     void addOrUpdateRole(ManagerRole role);
     void deleteRole(Long roleId);
 
