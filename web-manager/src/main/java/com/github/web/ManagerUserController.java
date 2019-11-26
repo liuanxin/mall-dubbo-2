@@ -84,7 +84,7 @@ public class ManagerUserController {
         return ManagerUserVo.assemblyData(user, user.getMenus());
     }
     @NotNeedPermission
-    @ApiMethod(value = "获取用户昵称信息及菜单信息", index = 1)
+    @ApiMethod(value = "获取用户及菜单信息", index = 1)
     @GetMapping("/info")
     public JsonResult<ManagerUserVo> info() {
         Long userId = ManagerSessionUtil.getUserId();

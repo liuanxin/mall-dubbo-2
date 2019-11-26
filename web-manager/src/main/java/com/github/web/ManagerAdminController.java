@@ -35,12 +35,12 @@ public class ManagerAdminController {
         this.config = config;
     }
 
-    @ApiMethod("查询用户")
+    @ApiMethod(value = "查询用户", index = 10)
     @GetMapping("/user")
     public JsonResult<PageInfo<ManagerUser>> queryUser(String username, Boolean status, Page page) {
         return JsonResult.success("查询用户信息", adminService.queryUser(username, status, page));
     }
-    @ApiMethod("添加或修改用户")
+    @ApiMethod(value = "添加或修改用户", index = 11)
     @PostMapping("/user")
     public JsonResult addOrUpdateUser(ManagerUserDto user, @ApiParam("头像") MultipartFile image) {
         user.basicCheck();
@@ -52,19 +52,19 @@ public class ManagerAdminController {
         adminService.addOrUpdateUser(managerUser);
         return JsonResult.success(String.format("用户%s成功", (user.hasUpdate() ? "修改" : "添加")));
     }
-    @ApiMethod("删除用户")
+    @ApiMethod(value = "删除用户", index = 12)
     @DeleteMapping("/user")
     public JsonResult deleteUser(Long id) {
         adminService.deleteUser(id);
         return JsonResult.success("用户删除成功");
     }
 
-    @ApiMethod("查询角色")
+    @ApiMethod(value = "查询角色", index = 20)
     @GetMapping("/role")
     public JsonResult<List<ManagerRole>> queryRole() {
         return JsonResult.success("查询所有角色", adminService.queryBasicRole());
     }
-    @ApiMethod("添加或更新角色")
+    @ApiMethod(value = "添加或更新角色", index = 21)
     @PostMapping("/role")
     public JsonResult addOrUpdateRole(ManagerRoleDto role) {
         role.basicCheck();
@@ -72,7 +72,7 @@ public class ManagerAdminController {
         adminService.addOrUpdateRole(role.operateParam());
         return JsonResult.success(String.format("角色%s成功", (role.hasUpdate() ? "修改" : "添加")));
     }
-    @ApiMethod("删除角色")
+    @ApiMethod(value = "删除角色", index = 22)
     @DeleteMapping("/role")
     public JsonResult deleteRole(Long id) {
         adminService.deleteRole(id);
