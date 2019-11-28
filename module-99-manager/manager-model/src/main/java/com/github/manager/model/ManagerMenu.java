@@ -38,8 +38,6 @@ public class ManagerMenu implements Serializable {
     /** 子菜单 */
     private List<ManagerMenu> children;
 
-    /** 菜单下的权限 id */
-    private List<Long> permissionIds;
     /** 菜单下的权限 */
     private List<ManagerPermission> permissionList;
 
