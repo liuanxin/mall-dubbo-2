@@ -21,6 +21,12 @@ public class ManagerUserVo {
     @ApiReturn("用户名")
     private String username;
 
+    @ApiReturn("昵称")
+    private String nickName;
+
+    @ApiReturn("头像")
+    private String avatar;
+
     @ApiReturn("true 则表示是管理员")
     private boolean hasAdmin;
 
@@ -37,7 +43,7 @@ public class ManagerUserVo {
         private String front;
 
         @ApiReturn("子菜单")
-        private List<ManagerMenuVo> childMenus;
+        private List<ManagerMenuVo> children;
     }
 
 

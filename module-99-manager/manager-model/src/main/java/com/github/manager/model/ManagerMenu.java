@@ -36,7 +36,7 @@ public class ManagerMenu implements Serializable {
     // 下面的字段不与数据库关联, 只做为数据载体进行传输
 
     /** 子菜单 */
-    private List<ManagerMenu> childMenus;
+    private List<ManagerMenu> children;
 
     /** 菜单下的权限 id */
     private List<Long> permissionIds;
@@ -49,7 +49,7 @@ public class ManagerMenu implements Serializable {
             for (ManagerMenu m : menus) {
                 handle(m, menuMap);
             }
-            menu.setChildMenus(Lists.newArrayList(menus));
+            menu.setChildren(Lists.newArrayList(menus));
         }
     }
     /** 将多条菜单整理成有父子关系的菜单, 且每条菜单中填充它下面的权限, 以 RoleId 为 key, List<Menu> 为 value 的 Map 形式返回 */
@@ -121,8 +121,8 @@ public class ManagerMenu implements Serializable {
         if (U.isNotBlank(menu)) {
             returnList.add(menu);
         }
-        if (A.isNotEmpty(menu.getChildMenus())) {
-            for (ManagerMenu childMenu : menu.getChildMenus()) {
+        if (A.isNotEmpty(menu.getChildren())) {
+            for (ManagerMenu childMenu : menu.getChildren()) {
                 allMenu(returnList, childMenu);
             }
         }
