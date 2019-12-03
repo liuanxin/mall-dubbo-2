@@ -53,9 +53,9 @@ public class ManagerServiceImpl implements ManagerService {
 
 
     @Override
-    public ManagerUser login(String username, String password) {
+    public ManagerUser login(String userName, String password) {
         ManagerUserExample userExample = new ManagerUserExample();
-        userExample.or().andUsernameEqualTo(username);
+        userExample.or().andUserNameEqualTo(userName);
         ManagerUser user = A.first(userMapper.selectByExample(userExample, new PageBounds(1)));
 
         U.assertNil(user, "无此用户");
@@ -155,11 +155,11 @@ public class ManagerServiceImpl implements ManagerService {
         return user;
     }
     @Override
-    public PageInfo<ManagerUser> queryUser(String username, Boolean status, Page page) {
+    public PageInfo<ManagerUser> queryUser(String userName, Boolean status, Page page) {
         ManagerUserExample userExample = new ManagerUserExample();
         ManagerUserExample.Criteria or = userExample.or();
-        if (U.isNotBlank(username)) {
-            or.andUsernameLike(U.like(username));
+        if (U.isNotBlank(userName)) {
+            or.andUserNameLike(U.like(userName));
         }
         if (U.isNotBlank(status)) {
             or.andStatusEqualTo(status);
@@ -182,7 +182,7 @@ public class ManagerServiceImpl implements ManagerService {
             userMapper.updateByPrimaryKeySelective(user);
         } else {
             ManagerUserExample userExample = new ManagerUserExample();
-            userExample.or().andUsernameEqualTo(user.getUsername());
+            userExample.or().andUserNameEqualTo(user.getUserName());
             int count = userMapper.countByExample(userExample);
             U.assertException(count > 0, "已经有同名用户, 不能再次添加");
 

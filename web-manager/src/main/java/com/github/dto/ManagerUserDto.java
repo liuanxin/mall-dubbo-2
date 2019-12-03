@@ -21,7 +21,7 @@ public class ManagerUserDto {
     private Long id;
 
     @ApiParam("角色名")
-    private String username;
+    private String userName;
 
     @ApiParam("昵称")
     private String nickName;
@@ -39,8 +39,8 @@ public class ManagerUserDto {
         return U.greater0(id);
     }
     public void basicCheck() {
-        if (U.isNotBlank(username)) {
-            U.assertException(username.trim().length() > 20, "用户名请保持在 20 个字以内");
+        if (U.isNotBlank(userName)) {
+            U.assertException(userName.trim().length() > 20, "用户名请保持在 20 个字以内");
         }
         if (U.isNotBlank(password)) {
             U.assertException(password.length() > 20, "密码超过 20 位还能记得住吗?");

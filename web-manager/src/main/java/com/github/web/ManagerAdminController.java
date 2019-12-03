@@ -24,7 +24,7 @@ import java.util.List;
 
 @ApiGroup(ManagerConst.MODULE_INFO)
 @RestController
-@RequestMapping("/manager")
+@RequestMapping("/admin")
 public class ManagerAdminController {
 
     @Reference(version = Const.DUBBO_VERSION, lazy = true, check = false, timeout = Const.DUBBO_TIMEOUT)
@@ -37,8 +37,8 @@ public class ManagerAdminController {
 
     @ApiMethod(value = "查询用户", index = 10)
     @GetMapping("/user")
-    public JsonResult<PageInfo<ManagerUser>> queryUser(String username, Boolean status, Page page) {
-        return JsonResult.success("查询用户信息", adminService.queryUser(username, status, page));
+    public JsonResult<PageInfo<ManagerUser>> queryUser(String userName, Boolean status, Page page) {
+        return JsonResult.success("查询用户信息", adminService.queryUser(userName, status, page));
     }
     @ApiMethod(value = "添加或修改用户", index = 11)
     @PostMapping("/user")

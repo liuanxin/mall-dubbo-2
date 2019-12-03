@@ -3,6 +3,8 @@ package com.github.common.util;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Map;
+
 public class UtilTest {
 
     @Test
@@ -63,5 +65,48 @@ public class UtilTest {
         Assert.assertTrue(U.checkEmail("10010@qq.com"));
         Assert.assertTrue(U.checkEmail("_abc-def@123-hij.uvw_xyz.com"));
         Assert.assertTrue(U.checkEmail("123-iurew@xyz.13s-rew.com"));
+    }
+
+    @Test
+    public void ipNum() {
+        Map<String, Long> ipNumMap = A.maps(
+                "127.0.0.1", 2130706433L,
+                "192.168.1.5", 3232235781L,
+                "106.12.99.55", 1779196727L
+        );
+        for (Map.Entry<String, Long> entry : ipNumMap.entrySet()) {
+            Assert.assertEquals(U.ip2num(entry.getKey()), entry.getValue().longValue());
+            Assert.assertEquals(U.num2ip(entry.getValue()), entry.getKey());
+        }
+        System.out.println(U.ip2num("::1"));
+        System.out.println(U.ip2num("ff02::2"));
+        System.out.println();
+        System.out.println(U.num2ip(1L));
+        System.out.println(U.num2ip(2L));
+    }
+
+    @Test
+    public void sign() {
+        Map<String, String[]> paramMap = A.linkedMaps(
+                "id", new String[] { "123" },
+                "type", new String[] { "2" },
+                "phone", new String[] { "13012345678" },
+                "name", new String[] { "xx" },
+                "desc", new String[] { "中文" }
+        );
+        System.out.println("准备发送的数据: " + U.formatParam(paramMap) + "\n");
+
+        paramMap = SignUtil.handleSign(paramMap);
+        System.out.println("使用默认 key 真正发送的数据: " + U.formatParam(paramMap));
+        SignUtil.checkSign(paramMap);
+        System.out.println("使用默认 key 检查通过");
+
+        System.out.println();
+
+        String key = "123";
+        paramMap = SignUtil.handleSign(paramMap, key);
+        System.out.println("使用指定 key 真正发送的数据: " + U.formatParam(paramMap));
+        SignUtil.checkSign(paramMap, key);
+        System.out.println("使用指定 key 检查通过");
     }
 }

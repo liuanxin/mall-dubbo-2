@@ -12,10 +12,10 @@ import java.util.List;
 public interface ManagerService {
 
     /** 验证登录并返回用户信息 */
-    ManagerUser login(String username, String password);
+    ManagerUser login(String userName, String password);
     ManagerUser getUser(Long userId);
     /** 管理员查询用户 */
-    PageInfo<ManagerUser> queryUser(String username, Boolean status, Page page);
+    PageInfo<ManagerUser> queryUser(String userName, Boolean status, Page page);
     /** 管理员添加或修改用户(包括重置密码, 修改状态) */
     void addOrUpdateUser(ManagerUser user);
     /** 管理员删除用户 */

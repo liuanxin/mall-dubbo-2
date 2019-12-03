@@ -19,7 +19,7 @@ public class ManagerUserVo {
     private Long id;
 
     @ApiReturn("用户名")
-    private String username;
+    private String userName;
 
     @ApiReturn("昵称")
     private String nickName;

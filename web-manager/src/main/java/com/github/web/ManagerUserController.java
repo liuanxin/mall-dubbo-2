@@ -51,11 +51,11 @@ public class ManagerUserController {
     @NotNeedLogin
     @ApiMethod(value = "登录", index = 0)
     @PostMapping("/login")
-    public JsonResult<ManagerUserVo> login(@ApiParam("用户名") String username,
+    public JsonResult<ManagerUserVo> login(@ApiParam("用户名") String userName,
                                            @ApiParam("密码") String password,
                                            @ApiParam("验证码, 密码输错 " + FAIL_LOGIN_COUNT + " 次后需要") String code) {
-        U.assertException(U.isBlank(username) || U.isBlank(password), "请输入用户名或密码");
-        String failLoginKey = active + ":login:fail:" + username;
+        U.assertException(U.isBlank(userName) || U.isBlank(password), "请输入用户名或密码");
+        String failLoginKey = active + ":login:fail:" + userName;
         long failCount = U.toLong(cacheService.get(failLoginKey));
         if (failCount >= FAIL_LOGIN_COUNT) {
             U.assertNil(code, "请输入验证码");
@@ -64,7 +64,7 @@ public class ManagerUserController {
             }
         }
 
-        ManagerUser user = adminService.login(username, password);
+        ManagerUser user = adminService.login(userName, password);
         boolean cannotLogin = U.isNotBlank(user.getStatus()) && user.getStatus();
         U.assertException(cannotLogin, "用户无法登录");
         if (Encrypt.checkNotBcrypt(password, user.getPassword())) {

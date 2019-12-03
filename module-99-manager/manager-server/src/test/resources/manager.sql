@@ -23,13 +23,13 @@ PS: 不需要后端管理的菜单后端不需要, 比如每个人都可以操�
 DROP TABLE IF EXISTS `t_manager_user`;
 CREATE TABLE IF NOT EXISTS `t_manager_user` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名',
+  `user_name` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名',
   `password` varchar(32) NOT NULL DEFAULT '' COMMENT '密码',
   `nick_name` varchar(32) NOT NULL DEFAULT '' COMMENT '昵称',
   `avatar` varchar(256) NOT NULL DEFAULT '' COMMENT '头像',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '1 表示已禁用',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
+  UNIQUE KEY `user_name` (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户';
 
 

@@ -19,8 +19,8 @@ public class ManagerUser implements Serializable {
 
     private Long id;
 
-    /** 用户名 --> username */
-    private String username;
+    /** 用户名 --> user_name */
+    private String userName;
 
     /** 密码 --> password */
     private String password;
@@ -47,7 +47,7 @@ public class ManagerUser implements Serializable {
 
     /** 当前用户是管理员账号就返回 true */
     public boolean getHasAdmin() {
-        return ROOT_LIST.contains(username);
+        return ROOT_LIST.contains(userName);
     }
     public boolean notAdmin() {
         return !getHasAdmin();
