@@ -26,6 +26,10 @@ unionId 是 微信号 与 开放平台 关联后得到的用户标识, 不同的
 app:   https://developers.weixin.qq.com/doc/oplatform/Mobile_App/WeChat_Login/Authorized_API_call_UnionID.html
 小程序: https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/union-id.html
        https://developers.weixin.qq.com/miniprogram/introduction/#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%BB%91%E5%AE%9A%E5%BE%AE%E4%BF%A1%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E5%B8%90%E5%8F%B7
+
+公众平台: https://mp.weixin.qq.com   主要用来做公众号、小程序
+开放平台: https://open.weixin.qq.com 主要用来做 app、网站
+商户平台: https://pay.weixin.qq.com  主要用来做支付
 */
 
 DROP TABLE IF EXISTS `t_user_auth`;
