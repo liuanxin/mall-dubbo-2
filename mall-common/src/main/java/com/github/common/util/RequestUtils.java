@@ -128,8 +128,8 @@ public final class RequestUtils {
         sbd.append(scheme).append("://").append(request.getServerName());
 
         int port = request.getServerPort();
-        boolean http = ("http".equals(scheme) && port != 80);
-        boolean https = ("https".equals(scheme) && port != 80 && port != 443);
+        boolean http = ("http".equalsIgnoreCase(scheme) && port != 80);
+        boolean https = ("https".equalsIgnoreCase(scheme) && port != 80 && port != 443);
         if (http || https) {
             sbd.append(':').append(port);
         }
