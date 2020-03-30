@@ -2,9 +2,8 @@
 ** spring boot 2 + dubbo
 
 *** 说明
-安装 lombok 和 mybatis 插件
 
-将下面的内容保存成 settings.xml 并放到 ${user.home}/.m2 目录下(没有此目录则新建), 如果想要改变仓库地址, 注释解开并设置即可
+将下面的内容保存成 ~settings.xml~ 并放到 ~${user.home}/.m2~ 目录下(没有此目录则新建), 如果想要改变仓库地址, 注释解开并设置即可
 #+BEGIN_SRC xml
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
