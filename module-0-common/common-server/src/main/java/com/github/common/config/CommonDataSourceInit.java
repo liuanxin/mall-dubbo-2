@@ -3,7 +3,6 @@ package com.github.common.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.common.Const;
 import com.github.liuanxin.page.PageInterceptor;
-import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -28,11 +27,6 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = Const.BASE_PACKAGE)
 public class CommonDataSourceInit {
 
-    /** mybatis 的分页插件 */
-    private Interceptor mybatisPage() {
-        return new PageInterceptor("mysql");
-    }
-
     /**
      * http://docs.spring.io/spring-boot/docs/1.3.6.RELEASE/reference/htmlsingle/#howto-two-datasources<br/>
      * &#064;EnableTransactionManagement 注解等同于: &lt;tx:annotation-driven /&gt;
@@ -54,8 +48,8 @@ public class CommonDataSourceInit {
         sessionFactory.setMapperLocations(CommonConfigData.RESOURCE_ARRAY);
         // 装载 typeHandler 实现
         sessionFactory.setTypeHandlers(CommonConfigData.HANDLER_ARRAY);
-        // 插件
-        sessionFactory.setPlugins(mybatisPage());
+        // mybatis 的分页插件
+        sessionFactory.setPlugins(new PageInterceptor("mysql"));
         return sessionFactory.getObject();
     }
 
