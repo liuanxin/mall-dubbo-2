@@ -3,6 +3,8 @@ package com.github.common.date;
 /** 日期的格式化类型 */
 public enum DateFormatType {
 
+    /** yyyy-MM-dd HH:mm:ss.SSS */
+    YYYY_MM_DD_HH_MM_SS_S("yyyy-MM-dd HH:mm:ss.SSS"),
     /** yyyy-MM-dd HH:mm:ss SSS */
     YYYY_MM_DD_HH_MM_SS_SSS("yyyy-MM-dd HH:mm:ss SSS"),
     /** yyyy-MM-dd HH:mm:ss */
