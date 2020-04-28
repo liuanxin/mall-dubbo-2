@@ -10,7 +10,6 @@ import org.apache.ibatis.type.TypeHandler;
 import java.io.File;
 import java.io.IOException;
 import java.net.JarURLConnection;
-import java.net.URL;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +17,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /** 收集 mybatis 的类型处理工具类 */
+@SuppressWarnings("rawtypes")
 public final class CollectTypeHandlerUtil {
 
     /**
@@ -39,12 +39,12 @@ public final class CollectTypeHandlerUtil {
 
     /** 基于指定的类(用来获取 ClassLoader), 在指定的包名下获取 mybatis 的类型处理器 */
     private static List<TypeHandler> getHandleArray(Class clazz, String classPackage) {
-        if (LogUtil.ROOT_LOG.isTraceEnabled()) {
-            LogUtil.ROOT_LOG.trace("{} in ({})", clazz, U.getClassInFile(clazz));
+        if (LogUtil.ROOT_LOG.isDebugEnabled()) {
+            LogUtil.ROOT_LOG.debug("{} in ({})", clazz, U.getClassInFile(clazz));
         }
         List<TypeHandler> handlerList = Lists.newArrayList();
         String packageName = classPackage.replace(".", "/");
-        URL url = clazz.getClassLoader().getResource(packageName);
+        java.net.URL url = clazz.getClassLoader().getResource(packageName);
         if (url != null) {
             if ("file".equals(url.getProtocol())) {
                 File parent = new File(url.getPath());
@@ -85,7 +85,7 @@ public final class CollectTypeHandlerUtil {
             String className = classPackage + "." + name.replace(".class", "");
             try {
                 Class<?> clazz = Class.forName(className);
-                if (clazz != null && TypeHandler.class.isAssignableFrom(clazz)) {
+                if (TypeHandler.class.isAssignableFrom(clazz)) {
                     return (TypeHandler) clazz.newInstance();
                 }
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
