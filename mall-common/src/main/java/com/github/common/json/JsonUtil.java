@@ -1,20 +1,14 @@
 package com.github.common.json;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.github.common.util.A;
 import com.github.common.util.LogUtil;
 import com.github.common.util.U;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -43,16 +37,6 @@ public class JsonUtil {
             // configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
             // NON_NULL: null 值不序列化, NON_EMPTY: null 空字符串、长度为 0 的 list、map 都不序列化
             setSerializationInclusion(JsonInclude.Include.NON_NULL);
-
-            // 如果用 BigDecimal 表示金额时的处理: 保留两位小数的精度返回
-            registerModule(new SimpleModule().addSerializer(BigDecimal.class, new JsonSerializer<BigDecimal>() {
-                @Override
-                public void serialize(BigDecimal money, JsonGenerator gen, SerializerProvider ser) throws IOException {
-                    if (U.isNotBlank(money)) {
-                        gen.writeObject(money.setScale(2, RoundingMode.DOWN));
-                    }
-                }
-            }));
         }
     }
 
