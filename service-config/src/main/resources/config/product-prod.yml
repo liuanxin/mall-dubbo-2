@@ -1,6 +1,6 @@
 
 database:
-  url: jdbc:mysql://prod-db-product:3306/product?useAffectedRows=true&useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
+  url: jdbc:mysql://prod-db-product:3306/product?useAffectedRows=true&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
   userName: prod-product-user
   password: prod-product-pass
   initialSize: 10

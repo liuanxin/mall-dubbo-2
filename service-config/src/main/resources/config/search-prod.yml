@@ -4,7 +4,7 @@ spring:
     uris: [prod-search1:9200,prod-search2:9200,prod-search3:9200]
 
 database:
-  url:  jdbc:mysql://prod-db-search:3306/search-db-prod?useAffectedRows=true&useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
+  url:  jdbc:mysql://prod-db-search:3306/search-db-prod?useAffectedRows=true&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
   userName: prod-search-user
   password: prod-search-pass
   initialSize: 10
