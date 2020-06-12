@@ -83,8 +83,8 @@
         <zkclient.version>0.11</zkclient.version>
         <spring-boot-dubbo.version>1.0.0</spring-boot-dubbo.version>
 
-        <api-document.version>0.7.0</api-document.version>
-        <google-jib.version>2.1.0</google-jib.version>
+        <api-document.version>0.7.1</api-document.version>
+        <google-jib.version>2.4.0</google-jib.version>
     </properties>
 
     <dependencyManagement>
