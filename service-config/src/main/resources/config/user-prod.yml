@@ -5,7 +5,7 @@ database:
   password: prod-user-pass
   initialSize: 10
   minIdle: 10
-  maxActive: 100
+  maxActive: 10
   maxWait: 60000
   timeBetweenEvictionRunsMillis: 60000
   minEvictableIdleTimeMillis: 300000
