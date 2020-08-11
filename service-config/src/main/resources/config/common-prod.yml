@@ -3,7 +3,7 @@ database:
   url: jdbc:mysql://prod-db-common:3306/common?useAffectedRows=true&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
   userName: prod-common-user
   password: prod-common-pass
-  initialSize: 10
+  initialSize: 5
   minIdle: 10
   maxActive: 10
   maxWait: 60000
