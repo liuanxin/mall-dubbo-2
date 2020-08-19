@@ -1,5 +1,6 @@
 package com.github.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.common.mvc.SpringMvc;
 import com.github.common.mvc.VersionRequestMappingHandlerMapping;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -26,15 +26,14 @@ public class ManagerWebConfig extends WebMvcConfigurationSupport {
     @Value("${online}")
     private boolean online;
 
-    @Override
-    protected RequestMappingHandlerMapping createRequestMappingHandlerMapping() {
-        return new VersionRequestMappingHandlerMapping();
+    private final ObjectMapper objectMapper;
+    public ManagerWebConfig(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
     }
 
     @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        // 默认情况下, 如果请求是 .html 后缀将会返回视图, 关闭这项扩展
-        configurer.favorPathExtension(false);
+    protected RequestMappingHandlerMapping createRequestMappingHandlerMapping() {
+        return new VersionRequestMappingHandlerMapping();
     }
 
     @Override
@@ -49,7 +48,7 @@ public class ManagerWebConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        SpringMvc.handlerConvert(converters, online);
+        SpringMvc.handlerConvert(converters, online, objectMapper);
     }
 
     @Override
