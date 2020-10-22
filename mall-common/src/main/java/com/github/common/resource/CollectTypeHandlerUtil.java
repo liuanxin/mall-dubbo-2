@@ -9,7 +9,9 @@ import org.apache.ibatis.type.TypeHandler;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.JarURLConnection;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +46,7 @@ public final class CollectTypeHandlerUtil {
         }
         List<TypeHandler> handlerList = Lists.newArrayList();
         String packageName = classPackage.replace(".", "/");
-        java.net.URL url = clazz.getClassLoader().getResource(packageName);
+        URL url = clazz.getClassLoader().getResource(packageName);
         if (url != null) {
             if ("file".equals(url.getProtocol())) {
                 File parent = new File(url.getPath());
@@ -86,9 +88,10 @@ public final class CollectTypeHandlerUtil {
             try {
                 Class<?> clazz = Class.forName(className);
                 if (TypeHandler.class.isAssignableFrom(clazz)) {
-                    return (TypeHandler) clazz.newInstance();
+                    return (TypeHandler) clazz.getDeclaredConstructor().newInstance();
                 }
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+                    | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                 if (LogUtil.ROOT_LOG.isErrorEnabled()) {
                     LogUtil.ROOT_LOG.error(String.format("TypeHandler clazz (%s) exception: ", className), e);
                 }
