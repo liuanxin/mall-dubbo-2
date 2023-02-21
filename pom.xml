@@ -74,7 +74,7 @@
         <mybatis-redis-cache.version>1.2.7</mybatis-redis-cache.version>
 
         <!-- -Ddubbo.reference.check=false -->
-        <dubbo.version>2.6.2</dubbo.version>
+        <dubbo.version>2.6.12</dubbo.version>
         <!-- > 2.6.0 的版本开始需要有这个包 -->
         <curator-framework.version>4.2.0</curator-framework.version>
         <!-- >= 2.6.0 开始支持 kryo 序列化 -->
