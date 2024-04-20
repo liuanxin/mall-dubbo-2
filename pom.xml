@@ -59,7 +59,7 @@
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
 
         <zipkin.version>2.12.9</zipkin.version>
-        <guava.version>30.0-jre</guava.version>
+        <guava.version>32.0.0-jre</guava.version>
         <joda.version>2.10.6</joda.version>
         <okhttp.version>3.14.9</okhttp.version>
         <commons-lang3.version>3.11</commons-lang3.version>
